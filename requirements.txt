@@ -1,0 +1,29 @@
+# Core Libraries
+torch>=2.0.0
+torchvision>=0.15.0
+facenet-pytorch>=2.5.3
+mtcnn>=0.1.1
+opencv-python>=4.8.0
+Pillow>=10.0.0
+numpy>=1.24.0
+
+# Database & Data Processing
+pandas>=2.0.0
+openpyxl>=3.1.0
+sqlite3
+
+# GUI
+tkinter
+Pillow>=10.0.0
+
+# Reporting
+reportlab>=4.0.0
+fpdf>=1.7.2
+
+# Anti-Spoofing
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2023.3

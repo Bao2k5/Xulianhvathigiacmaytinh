@@ -1,0 +1,71 @@
+@startuml UseCase_Diagram
+
+title HỆ THỐNG CHẤM CÔNG NHẬN DIỆN KHUÔN MẶT
+
+' Actor bên trái
+actor "Nhân viên" as Employee
+
+' Hệ thống ở giữa với khung rõ ràng
+rectangle "System Boundary" {
+  
+  ' Use case chính của Nhân viên (bên trái)
+  usecase "Đăng ký khuôn mặt" as UC1
+  usecase "Chấm công" as UC2
+  
+  ' Use case kỹ thuật (ở giữa)
+  usecase "Phát hiện khuôn mặt\n(MTCNN)" as UC5
+  usecase "Trích xuất đặc trưng\n(FaceNet)" as UC6
+  usecase "Nhận diện khuôn mặt" as UC7
+  usecase "Kiểm tra Live net" as UC8
+  
+  ' Use case chính của Quản trị viên (bên phải)
+  usecase "Quản lý nhân viên" as UC3  
+  usecase "Xem báo cáo" as UC4
+  
+  ' Use case mở rộng
+  usecase "Thêm nhân viên" as UC3_1
+  usecase "Sửa thông tin" as UC3_2  
+  usecase "Xóa nhân viên" as UC3_3
+  usecase "Xuất Excel" as UC4_1
+  usecase "Xuất PDF" as UC4_2
+
+  ' Ép bố cục theo hàng ngang
+  UC1 -[hidden]- UC5
+  UC5 -[hidden]- UC3
+  UC2 -[hidden]- UC6
+  UC6 -[hidden]- UC4
+  
+}
+
+' Actor bên phải
+actor "Quản trị viên" as Admin
+
+' Quan hệ Actor -- Use Case (không có đầu mũi tên)
+Employee -- UC1
+Employee -- UC2
+
+Admin -- UC3
+Admin -- UC4
+
+' Quan hệ include (bắt buộc)
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC6 : <<include>>
+
+UC2 ..> UC5 : <<include>>
+UC2 ..> UC6 : <<include>>  
+UC2 ..> UC7 : <<include>>
+UC2 ..> UC8 : <<include>>
+
+' UC3 (Thêm NV) cũng cần chụp ảnh
+UC3_1 ..> UC5 : <<include>>
+UC3_1 ..> UC6 : <<include>>
+
+' Quan hệ extend (tùy chọn)
+UC3_1 ..> UC3 : <<extend>>
+UC3_2 ..> UC3 : <<extend>>
+UC3_3 ..> UC3 : <<extend>>
+
+UC4_1 ..> UC4 : <<extend>>
+UC4_2 ..> UC4 : <<extend>>
+
+@enduml
